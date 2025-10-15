@@ -94,18 +94,56 @@ forge build
 
 ### Deploying `Greeter`
 
+You can deploy using Foundry CLI or Remix IDE. Choose your preferred method below.
+
+#### Option 1: Deploy with Remix IDE
+
+1. **Open Remix**: Go to [remix.ethereum.org](https://remix.ethereum.org)
+
+2. **Create a new file**: 
+   - Click "Create new file" in the File Explorer
+   - Name it `Greeter.sol`
+
+3. **Copy the contract code**:
+   ```solidity
+   // SPDX-License-Identifier: UNLICENSED
+   pragma solidity ^0.8.13;
+
+   contract Greeter {
+       string public greeting;
+       constructor (string memory _initialGreeting){
+           greeting = _initialGreeting;
+       }
+       function setGreeting (string memory _newGreeting) public{
+           greeting = _newGreeting;
+       }
+       function greet() public view returns(string memory){
+           return greeting;
+       }
+   }
+   ```
+
+4. **Compile the contract**:
+   - Go to the "Solidity Compiler" tab
+   - Select compiler version `0.8.13` or higher
+   - Click "Compile Greeter.sol"
+
+5. **Deploy the contract**:
+   - Go to the "Deploy & Run Transactions" tab
+   - Select your environment (Injected Provider for MetaMask, or VM for local testing)
+   - In the "Constructor Arguments" field, enter: `"Hello, world!"`
+   - Click "Deploy"
+
+6. **Interact with the contract**:
+   - After deployment, you'll see the contract in the "Deployed Contracts" section
+   - Click on `greet` to read the current greeting
+   - Use `setGreeting` to update the greeting (enter new message and click the function)
+
+#### Option 2: Deploy with Foundry CLI
+
 You can deploy locally to Anvil or to a testnet/mainnet by providing your RPC URL and private key. The example below shows both.
 
-Local (Anvil):
 
-```bash
-anvil
-# In a new terminal window/tab
-forge create Greeting.sol:Greeter \
-  --rpc-url http://127.0.0.1:8545 \
-  --private-key <anvil_private_key> \
-  --constructor-args "Hello, world!"
-```
 
 Testnet/Mainnet:
 
@@ -120,9 +158,7 @@ forge create Greeting.sol:Greeter \
 
 After deployment, you will get the contract address in the output. To read the greeting:
 
-```bash
-cast call <DEPLOYED_ADDRESS> "greet()(string)"
-```
+
 
 To update the greeting:
 
