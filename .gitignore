@@ -12,3 +12,12 @@ docs/
 
 # Dotenv file
 .env
+
+foundry.toml
+foundry.lock
+.gitmodules
+lib
+test
+script
+cache
+.github
